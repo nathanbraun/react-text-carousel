@@ -41,27 +41,6 @@ var TextCarousel = (function (_Component) {
       currentPhrase: 0
     };
 
-    this.renderWord = function () {
-      var domNode = _this.refs.phraseContainer;
-      _reactDom2["default"].unmountComponentAtNode(domNode);
-      _reactDom2["default"].render(_react2["default"].createElement(
-        _reactTypist2["default"],
-        _this.props.typistProps,
-        _this.getCurrentPhrase()
-      ), domNode);
-    };
-
-    this.setNextPhrase = function () {
-      var nextPhrase = 0;
-      if (_this.state.currentPhrase < _this.props.phrases.length - 1) {
-        nextPhrase = _this.state.currentPhrase += 1;
-      }
-      _this.setState({
-        currentPhrase: nextPhrase
-      });
-      _this.renderWord();
-    };
-
     this.componentDidMount = function () {
       _this.renderWord();
       _this.setupTimer();
@@ -75,6 +54,21 @@ var TextCarousel = (function (_Component) {
       });
     };
 
+    this.componentWillUnmount = function () {
+      _this.removeTimer();
+    };
+
+    this.setNextPhrase = function () {
+      var nextPhrase = 0;
+      if (_this.state.currentPhrase < _this.props.phrases.length - 1) {
+        nextPhrase = _this.state.currentPhrase += 1;
+      }
+      _this.setState({
+        currentPhrase: nextPhrase
+      });
+      _this.renderWord();
+    };
+
     this.setupTimer = function () {
       _this.timer = window.setInterval(function () {
         _this.setNextPhrase();
@@ -85,16 +79,22 @@ var TextCarousel = (function (_Component) {
       window.clearInterval(_this.timer);
     };
 
-    this.componentWillUnmount = function () {
-      _this.removeTimer();
-    };
-
     this.getCurrentPhrase = function () {
       return _this.props.phrases[_this.state.currentPhrase];
     };
 
+    this.renderWord = function () {
+      var domNode = _this.refs.phraseContainer;
+      _reactDom2["default"].unmountComponentAtNode(domNode);
+      _reactDom2["default"].render(_react2["default"].createElement(
+        _reactTypist2["default"],
+        _this.props.typistProps,
+        _this.getCurrentPhrase()
+      ), domNode);
+    };
+
     this.render = function () {
-      return _react2["default"].createElement("span", { ref: "phraseContainer" });
+      return _react2["default"].createElement("span", { className: "textCarouselContainer " + (_this.props.className || ""), ref: "phraseContainer" });
     };
   }
 

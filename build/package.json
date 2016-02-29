@@ -1,20 +1,18 @@
 {
   "name": "react-text-carousel",
-  "version": "0.0.0",
-  "description": "react component",
+  "version": "0.1.0",
+  "description": "React component for swithcing between texts using a typing animation effect.",
   "main": "./lib/index.js",
   "repository": {
     "type": "git",
-    "url": ".git"
+    "url": "https://github.com/mynewsdesk/react-text-carousel"
   },
-  "homepage": "",
-  "bugs": "/issues",
+  "homepage": "http://mynewsdesk.github.io/react-text-carousel/",
+  "bugs": "https://github.com/mynewsdesk/react-text-carousel/issues",
   "directories": {
     "example": "examples"
   },
-  "authors": [
-    ""
-  ],
+  "author": "Andreas Arledal",
   "license": "MIT",
   "peerDependencies": {
     "react": "^0.14.0",
@@ -25,10 +23,11 @@
   ],
   "keywords": [
     "react",
-    "react component",
-    "animation"
+    "react-component",
+    "animation",
+    "text"
   ],
   "dependencies": {
-    "react-typist": "^0.3.0"
+    "react-typist": "0.3.0"
   }
 }

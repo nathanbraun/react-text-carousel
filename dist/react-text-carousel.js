@@ -116,27 +116,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	      currentPhrase: 0
 	    };
 	
-	    this.renderWord = function () {
-	      var domNode = _this.refs.phraseContainer;
-	      _reactDom2["default"].unmountComponentAtNode(domNode);
-	      _reactDom2["default"].render(_react2["default"].createElement(
-	        _reactTypist2["default"],
-	        _this.props.typistProps,
-	        _this.getCurrentPhrase()
-	      ), domNode);
-	    };
-	
-	    this.setNextPhrase = function () {
-	      var nextPhrase = 0;
-	      if (_this.state.currentPhrase < _this.props.phrases.length - 1) {
-	        nextPhrase = _this.state.currentPhrase += 1;
-	      }
-	      _this.setState({
-	        currentPhrase: nextPhrase
-	      });
-	      _this.renderWord();
-	    };
-	
 	    this.componentDidMount = function () {
 	      _this.renderWord();
 	      _this.setupTimer();
@@ -150,6 +129,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	      });
 	    };
 	
+	    this.componentWillUnmount = function () {
+	      _this.removeTimer();
+	    };
+	
+	    this.setNextPhrase = function () {
+	      var nextPhrase = 0;
+	      if (_this.state.currentPhrase < _this.props.phrases.length - 1) {
+	        nextPhrase = _this.state.currentPhrase += 1;
+	      }
+	      _this.setState({
+	        currentPhrase: nextPhrase
+	      });
+	      _this.renderWord();
+	    };
+	
 	    this.setupTimer = function () {
 	      _this.timer = window.setInterval(function () {
 	        _this.setNextPhrase();
@@ -160,16 +154,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	      window.clearInterval(_this.timer);
 	    };
 	
-	    this.componentWillUnmount = function () {
-	      _this.removeTimer();
-	    };
-	
 	    this.getCurrentPhrase = function () {
 	      return _this.props.phrases[_this.state.currentPhrase];
 	    };
 	
+	    this.renderWord = function () {
+	      var domNode = _this.refs.phraseContainer;
+	      _reactDom2["default"].unmountComponentAtNode(domNode);
+	      _reactDom2["default"].render(_react2["default"].createElement(
+	        _reactTypist2["default"],
+	        _this.props.typistProps,
+	        _this.getCurrentPhrase()
+	      ), domNode);
+	    };
+	
 	    this.render = function () {
-	      return _react2["default"].createElement("span", { ref: "phraseContainer" });
+	      return _react2["default"].createElement("span", { className: "textCarouselContainer " + (_this.props.className || ""), ref: "phraseContainer" });
 	    };
 	  }
 	
@@ -370,6 +370,16 @@ return /******/ (function(modules) { // webpackBootstrap
 		      } else {
 		        this.onTypingDone();
 		      }
+		    }
+		  }, {
+		    key: 'shouldComponentUpdate',
+		    value: function shouldComponentUpdate(nextProps, nextState) {
+		      for (var idx = 0; idx < nextState.text.length; idx++) {
+		        var txt = this.state.text[idx];
+		        var ntxt = nextState.text[idx];
+		        if (txt !== ntxt && ntxt.length > 0) return true;
+		      }
+		      return this.state.isDone !== nextState.isDone;
 		    }
 		  }, {
 		    key: 'typeAll',
@@ -695,7 +705,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	/***/ }
 	/******/ ]);
-
 
 /***/ }
 /******/ ])
