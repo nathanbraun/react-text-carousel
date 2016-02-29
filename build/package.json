@@ -1,0 +1,34 @@
+{
+  "name": "react-text-carousel",
+  "version": "0.0.0",
+  "description": "react component",
+  "main": "./lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": ".git"
+  },
+  "homepage": "",
+  "bugs": "/issues",
+  "directories": {
+    "example": "examples"
+  },
+  "authors": [
+    ""
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0"
+  },
+  "tags": [
+    "react-text-carousel"
+  ],
+  "keywords": [
+    "react",
+    "react component",
+    "animation"
+  ],
+  "dependencies": {
+    "react-typist": "^0.3.0"
+  }
+}
