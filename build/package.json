@@ -12,7 +12,10 @@
   "directories": {
     "example": "examples"
   },
-  "author": "Andreas Arledal",
+  "author": "Andreas Arledal <andreas.arledal@me.com>",
+  "contributors": [
+    "André Ligné <hello@bzf.se>"
+  ],
   "license": "MIT",
   "peerDependencies": {
     "react": "^0.14.0",

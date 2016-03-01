@@ -13,11 +13,13 @@
     "example": "examples"
   },
   "scripts": {
-    "test": "rackt test --single-run --browsers Firefox",
+    "test": "echo \"No test specified\" && exit 0",
     "start": "rackt server"
   },
   "author": "Andreas Arledal <andreas.arledal@me.com>",
-  "contributors": [ "André Ligné <hello@bzf.se>" ],
+  "contributors": [
+    "André Ligné <hello@bzf.se>"
+  ],
   "license": "MIT",
   "devDependencies": {
     "rackt-cli": "^0.4.0",
