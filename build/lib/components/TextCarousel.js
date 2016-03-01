@@ -36,65 +36,57 @@ var TextCarousel = (function (_Component) {
 
     _get(Object.getPrototypeOf(TextCarousel.prototype), "constructor", this).apply(this, arguments);
 
-    this.timer = null;
     this.state = {
-      currentPhrase: 0
+      currentPhraseIndex: 0
     };
 
     this.componentDidMount = function () {
       _this.renderWord();
-      _this.setupTimer();
-
-      document.addEventListener("visibilitychange", function () {
-        if (document.hidden) {
-          _this.removeTimer();
-        } else {
-          _this.setupTimer();
-        }
-      });
     };
 
     this.componentWillUnmount = function () {
-      _this.removeTimer();
+      clearTimeout(_this.timer);
     };
 
     this.setNextPhrase = function () {
-      var nextPhrase = 0;
-      if (_this.state.currentPhrase < _this.props.phrases.length - 1) {
-        nextPhrase = _this.state.currentPhrase += 1;
-      }
+      var phrases = _this.props.phrases;
+      var currentPhraseIndex = _this.state.currentPhraseIndex;
+
       _this.setState({
-        currentPhrase: nextPhrase
+        currentPhraseIndex: (currentPhraseIndex + 1) % phrases.length
       });
-      _this.renderWord();
     };
 
-    this.setupTimer = function () {
-      _this.timer = window.setInterval(function () {
-        _this.setNextPhrase();
+    this.handleTypingComplete = function () {
+      _this.timer = setTimeout(function () {
+        _this.renderWord();
       }, _this.props.interval);
     };
 
-    this.removeTimer = function () {
-      window.clearInterval(_this.timer);
-    };
-
     this.getCurrentPhrase = function () {
-      return _this.props.phrases[_this.state.currentPhrase];
+      return _this.props.phrases[_this.state.currentPhraseIndex];
     };
 
     this.renderWord = function () {
       var domNode = _this.refs.phraseContainer;
+      var typistProps = Object.assign({}, _this.props.typistProps, {
+        onTypingDone: _this.handleTypingComplete
+      });
+
       _reactDom2["default"].unmountComponentAtNode(domNode);
       _reactDom2["default"].render(_react2["default"].createElement(
         _reactTypist2["default"],
-        _this.props.typistProps,
+        typistProps,
         _this.getCurrentPhrase()
       ), domNode);
+
+      _this.setNextPhrase();
     };
 
     this.render = function () {
-      return _react2["default"].createElement("span", { className: "textCarouselContainer " + (_this.props.className || ""), ref: "phraseContainer" });
+      var customClass = _this.props.className || "";
+
+      return _react2["default"].createElement("span", { className: "textCarouselContainer " + customClass + "}", ref: "phraseContainer" });
     };
   }
 
@@ -120,3 +112,5 @@ var TextCarousel = (function (_Component) {
 
 exports["default"] = TextCarousel;
 module.exports = exports["default"];
+
+// TODO: add hideWhenDoneDelay time to the interval
