@@ -16,7 +16,8 @@
     "test": "rackt test --single-run --browsers Firefox",
     "start": "rackt server"
   },
-  "author": "Andreas Arledal",
+  "author": "Andreas Arledal <andreas.arledal@me.com>",
+  "contributors": [ "André Ligné <hello@bzf.se>" ],
   "license": "MIT",
   "devDependencies": {
     "rackt-cli": "^0.4.0",
