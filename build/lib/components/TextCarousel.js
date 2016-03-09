@@ -26,6 +26,14 @@ var _reactTypist = require("react-typist");
 
 var _reactTypist2 = _interopRequireDefault(_reactTypist);
 
+var _lodashAssign = require("lodash/assign");
+
+var _lodashAssign2 = _interopRequireDefault(_lodashAssign);
+
+var _lodashGet = require("lodash/get");
+
+var _lodashGet2 = _interopRequireDefault(_lodashGet);
+
 var TextCarousel = (function (_Component) {
   _inherits(TextCarousel, _Component);
 
@@ -58,9 +66,12 @@ var TextCarousel = (function (_Component) {
     };
 
     this.handleTypingComplete = function () {
+      // Need the delay since typist triggers typingComplete before that happens
+      var cursorHideDelay = (0, _lodashGet2["default"])(_this.props.typistProps, 'cursor.hideWhenDoneDelay', 0);
+
       _this.timer = setTimeout(function () {
         _this.renderWord();
-      }, _this.props.interval);
+      }, _this.props.interval + cursorHideDelay);
     };
 
     this.getCurrentPhrase = function () {
@@ -69,7 +80,7 @@ var TextCarousel = (function (_Component) {
 
     this.renderWord = function () {
       var domNode = _this.refs.phraseContainer;
-      var typistProps = Object.assign({}, _this.props.typistProps, {
+      var typistProps = (0, _lodashAssign2["default"])({}, _this.props.typistProps, {
         onTypingDone: _this.handleTypingComplete
       });
 
@@ -101,7 +112,7 @@ var TextCarousel = (function (_Component) {
   }, {
     key: "defaultProps",
     value: {
-      interval: 3000,
+      interval: 2000,
       typistProps: {}
     },
     enumerable: true
@@ -112,5 +123,3 @@ var TextCarousel = (function (_Component) {
 
 exports["default"] = TextCarousel;
 module.exports = exports["default"];
-
-// TODO: add hideWhenDoneDelay time to the interval

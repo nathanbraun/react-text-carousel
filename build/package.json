@@ -1,6 +1,6 @@
 {
   "name": "react-text-carousel",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "React component for swithcing between texts using a typing animation effect.",
   "main": "./lib/index.js",
   "repository": {
@@ -31,6 +31,7 @@
     "text"
   ],
   "dependencies": {
+    "lodash": "^4.6.1",
     "react-typist": "0.3.0"
   }
 }
