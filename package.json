@@ -40,6 +40,7 @@
     "text"
   ],
   "dependencies": {
+    "lodash": "^4.6.1",
     "react-typist": "0.3.0"
   }
 }
