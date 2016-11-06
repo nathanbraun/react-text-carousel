@@ -5,7 +5,7 @@
 React component for swithcing between texts using a typing animation effect. Based on
 [react-typist](https://github.com/jstejada/react-typist).
 
-[Demo](http://mynewsdesk.github.io/react-text-carousel/).
+[Demo](http://andreasarledal.github.io/react-text-carousel/).
 
 ## Install
 `npm install react-text-carousel` or `bower install react-text-carousel`
